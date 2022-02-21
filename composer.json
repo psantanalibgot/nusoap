@@ -1,11 +1,15 @@
 {
-  "name": "econea/nusoap",
+  "name": "psantanalibgot/nusoap",
   "type": "library",
-  "description": "Fixed NuSOAP for PHP 5.4 - 8.1",
+  "description": "Added soap:header for UsernameToken security",
   "keywords": ["soap","nusoap","php","http","xml","transport","client"],
   "license": "LGPL-2.0-only",
-  "homepage": "https://github.com/pwnlabs/nusoap",
+  "homepage": "https://github.com/psantanalibgot/nusoap",
   "authors": [
+    {
+      "name": "Pedro Santana",
+      "homepage": "https://github.com/psantanalibgot/nusoap"
+    },
     {
       "name": "Milan Felix Šulc",
       "homepage": "https://f3l1x.io"
