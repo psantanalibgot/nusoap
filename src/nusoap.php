@@ -1690,9 +1690,16 @@ class nusoap_xmlschema extends nusoap_base
         if (sizeof($this->imports) > 0) {
             foreach ($this->imports as $ns => $list) {
                 foreach ($list as $ii) {
-                    if ($ii['location'] != '') {
-                        $xml .= " <$schemaPrefix:import location=\"" . $ii['location'] . '" namespace="' . $ns . "\" />\n";
-                    } else {
+                    if (isset($ii['location'])) {
+                        $xml_location = " <$schemaPrefix:import location=\"" . $ii['location'] . '" namespace="' . $ns . "\" />\n";
+                    }
+                    if (isset($ii['schemaLocation'])) {
+                        $xml_location = " <$schemaPrefix:import schemaLocation=\"" . $ii['schemaLocation'] . '" namespace="' . $ns . "\" />\n";
+                    }
+                    if (isset($xml_location)) {
+                        $xml .= $xml_location;
+                    }
+                    else {
                         $xml .= " <$schemaPrefix:import namespace=\"" . $ns . "\" />\n";
                     }
                 }
@@ -5726,7 +5733,8 @@ class wsdl extends nusoap_base
                     } else {
                         $enc_style = '';
                     }
-                    $binding_xml .= "\n" . '    <input><soap:body use="' . $opParts['input']['use'] . '" namespace="' . $opParts['input']['namespace'] . '"' . $enc_style . '/></input>';
+                    $binding_xml .= "\n" . '    <input><soap:body use="' . $opParts['input']['use'] . '" namespace="' . $opParts['input']['namespace'] . '"' . $enc_style . '/>';
+                    $binding_xml .= "\n" . '    <soap:header use="' . $opParts['input']['use'] . '" message="tns:Header" part="Security"/></input>';
                     if (isset($opParts['output']['encodingStyle']) && $opParts['output']['encodingStyle'] != '') {
                         $enc_style = ' encodingStyle="' . $opParts['output']['encodingStyle'] . '"';
                     } else {
